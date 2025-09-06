@@ -108,7 +108,7 @@
           
             <h2 class="last-time">
               <span>最后更新于</span>
-              <time  class="article-updated" datetime="2025-09-06T09:17:29.889Z" itemprop="dateUpdated">2025-09-06</time>
+              <time  class="article-updated" datetime="2025-09-06T13:20:33.734Z" itemprop="dateUpdated">2025-09-06</time>
             </h2>
           
           
@@ -119,9 +119,9 @@
 </ul>
           <ul class="wrap-list dark">
   
-    <li><a href="/tags/%E5%89%8D%E7%AB%AF/">🏷️ 前端</a></li>
-  
     <li><a href="/tags/webpack5/">🏷️ webpack5</a></li>
+  
+    <li><a href="/tags/%E5%89%8D%E7%AB%AF/">🏷️ 前端</a></li>
   
 </ul>
         </div>
@@ -158,6 +158,15 @@
 <li>mode 模式<br> development 开发模式<br> production 生产模式 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mode:&#x27;development&#x27;        //开发模式</span><br><span class="line">mode:&#x27;production&#x27;        //生产模式</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>配置后运行指令为：npx webpack 即可</p>
+<h2 id="资源配置处理："><a href="#资源配置处理：" class="headerlink" title="资源配置处理："></a>资源配置处理：</h2><h3 id="进一步处理js资源"><a href="#进一步处理js资源" class="headerlink" title="进一步处理js资源:"></a>进一步处理js资源:</h3><pre><code>正常情况下webpack处理js文件只能处理es6部分，对于箭头函数语法无法处理
+解决方案：
+    - babel 处理js兼容性
+    - Eslint 处理代码格式不同
+先完成Eslint在完成babel
+</code></pre>
+<h5 id="eslint-配置文件"><a href="#eslint-配置文件" class="headerlink" title="eslint 配置文件"></a>eslint 配置文件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">eslint是一种可组装（可自由配置）的js和jsx代码检查工具</span><br><span class="line">我们使用Eslint关键是写Eslint配置文件，里面写上各种*rules*规则，将来运行Eslint时就会以写的规则对代码进行检查</span><br><span class="line"></span><br><span class="line">1. 配置文件</span><br><span class="line">    - .eslintrc</span><br><span class="line">    - .eslintrc.js</span><br><span class="line">    - .eslintrc.json</span><br><span class="line">    - package.json 中 eslintConfig 配置，不需要创建文件</span><br><span class="line"></span><br><span class="line">2. .eslintrc.js文件配置</span><br><span class="line">    module.exports = &#123;</span><br><span class="line">        // 解析选项</span><br><span class="line">        parserOptions: &#123;</span><br><span class="line">            ecmaVersion: 6,     //es6   </span><br><span class="line">            sourceType: &#x27;module&#x27;,       // Es模块化</span><br><span class="line">            ecmaFeatures: &#123;</span><br><span class="line">                jsx: true       // 如果是React项目，需要配置jsx</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        // 具体的检查规则</span><br><span class="line">            可选值：0, 1, 2/ off, warn, error</span><br><span class="line">            0: 关闭规则</span><br><span class="line">            1: 警告</span><br><span class="line">            2: 错误</span><br><span class="line">        rules: &#123;</span><br><span class="line">            semi: 2,    // 禁止</span><br><span class="line">        &#125;,</span><br><span class="line">        //继承其它规则，即其它人写好的规则，这里直接继承</span><br><span class="line">        extends: [</span><br><span class="line">            Eslin官方规则：eslint:recommended</span><br><span class="line">            Vue Cli 官方规则：plugin:vue/essential</span><br><span class="line">            使用；extends: [&#x27;eslint:recommended&#x27;]</span><br><span class="line">                继承后仍可以配置rules，重复部分以用户定义为主</span><br><span class="line">        ],</span><br><span class="line">        //https：//eslint.bootcss.com/docs/user-guide/configuring</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="eslint-安装和使用"><a href="#eslint-安装和使用" class="headerlink" title="eslint 安装和使用"></a>eslint 安装和使用</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">安装：</span><br><span class="line">    npm install eslint-webpack-plugin eslint --save-dev</span><br><span class="line"></span><br><span class="line">使用：</span><br><span class="line">    eslint属于插件，需要引用才能使用</span><br><span class="line">    且所有插件都是new 的调用</span><br><span class="line">    const ESLintPlugin = require(&#x27;eslint-webpack-plugin&#x27;);</span><br><span class="line">    module.exports = &#123;</span><br><span class="line">        plugins: [new ESLintPlugin(options)],</span><br><span class="line">    &#125;;</span><br><span class="line">    options: &#123;</span><br><span class="line">        context : path.resolve(__dirname, &#x27;src&#x27;),       //只检查src目录下的文件</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://eslint.nodejs.cn/docs/latest/use/getting-started">eslint官方文档</a></p>
 
       </section>
 
@@ -449,7 +458,7 @@
     <span>TOC</span>
   </div>
   <div class="widget-body">
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E9%85%8D%E7%BD%AE%E5%A4%84%E7%90%86%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">资源配置处理：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E5%A4%84%E7%90%86js%E8%B5%84%E6%BA%90"><span class="toc-number">1.1.</span> <span class="toc-text">进一步处理js资源:</span></a></li></ol></li></ol>
   </div>
 </section>
 
